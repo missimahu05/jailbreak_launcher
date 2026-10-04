@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jjtech-host-v3';
+const CACHE_NAME = 'jjtech-host-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
   './exploit-runner.js',
   './assets/ps4_pro.jpg',
   './assets/jjtech_logo.png',
+  './assets/jjtech_text.png',
   './exploit/psfree.mjs',
   './exploit/lapse.mjs',
   './exploit/config.mjs',

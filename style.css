@@ -132,11 +132,12 @@ body.ps-theme {
   text-decoration: none;
 }
 
-.brand-name {
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-pure);
+.brand-text-img {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  margin-left: 0.15rem;
+  filter: drop-shadow(0 2px 4px rgba(217, 119, 6, 0.25));
 }
 
 .nav-divider {
@@ -733,7 +734,7 @@ body.ps-theme {
 .brand-logo-img {
   border-radius: 8px;
   object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(0, 136, 255, 0.3));
+  filter: drop-shadow(0 0 8px rgba(0, 136, 255, 0.6));
 }
 
 /* ==========================================================================

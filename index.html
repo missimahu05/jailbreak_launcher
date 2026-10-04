@@ -24,20 +24,7 @@
       <div class="navbar-left">
         <!-- Logo JjTech -->
         <a href="#" class="brand-logo" aria-label="Accueil JjTech">
-          <svg class="brand-glyph" viewBox="0 0 36 36" width="34" height="34" fill="none" aria-hidden="true">
-            <path d="M10 6C10 4.89543 10.8954 4 12 4H18V24C18 28.4183 14.4183 32 10 32C7.79086 32 6 30.2091 6 28C6 25.7909 7.79086 24 10 24V6Z" fill="url(#brand-grad-1)"/>
-            <path d="M19 12H27C28.1046 12 29 12.8954 29 14V22C29 27.5228 24.5228 32 19 32V24C21.2091 24 23 22.2091 23 20V16H19V12Z" fill="url(#brand-grad-2)"/>
-            <defs>
-              <linearGradient id="brand-grad-1" x1="6" y1="4" x2="18" y2="32" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#38bdf8"/>
-                <stop offset="1" stop-color="#0284c7"/>
-              </linearGradient>
-              <linearGradient id="brand-grad-2" x1="19" y1="12" x2="29" y2="32" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#00a8ff"/>
-                <stop offset="1" stop-color="#0055ff"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <img src="assets/jjtech_logo.png" alt="JjTech" class="brand-logo-img" width="34" height="34">
           <span class="brand-name">JjTech</span>
         </a>
 
@@ -232,6 +219,65 @@
           <button class="dot" data-index="4" aria-label="Module 5"></button>
         </div>
       </section>
+
+      <!-- Panneau d'execution de l'exploit -->
+      <section class="exploit-panel" id="exploit-panel">
+        <div class="exploit-panel-header">
+          <div class="exploit-title-group">
+            <div class="exploit-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div>
+              <h2 class="exploit-title">Lanceur d'exploit</h2>
+              <p class="exploit-subtitle">PSFree + Lapse Kernel -- FW 9.00</p>
+            </div>
+          </div>
+          <div class="exploit-status" id="exploit-status">
+            <span class="status-dot status-idle"></span>
+            <span class="status-label" id="status-label">En attente</span>
+          </div>
+        </div>
+
+        <!-- Barre de progression -->
+        <div class="exploit-progress-container">
+          <div class="exploit-progress-bar">
+            <div class="exploit-progress-fill" id="exploit-progress-fill"></div>
+          </div>
+          <span class="exploit-progress-text" id="exploit-progress-text">0%</span>
+        </div>
+
+        <!-- Etape courante -->
+        <p class="exploit-stage-text" id="exploit-stage-text">Appuyez sur Lancer pour demarrer le jailbreak.</p>
+
+        <!-- Console de logs -->
+        <div class="exploit-console" id="exploit-console" aria-label="Console de logs exploit">
+          <div class="console-inner" id="console-log"></div>
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="exploit-actions">
+          <button class="exploit-launch-btn" id="exploit-launch-btn" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Lancer le Jailbreak</span>
+          </button>
+          <button class="exploit-clear-btn" id="exploit-clear-btn" type="button">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            <span>Effacer</span>
+          </button>
+        </div>
+
+        <!-- Credits PSFree (AGPL obligatoire) -->
+        <p class="exploit-credits">Powered by PSFree (anonymous) -- AGPL v3 -- Personnalise par JjTech</p>
+      </section>
     </main>
 
     <!-- Barre inférieure HUD de navigation manette PlayStation -->
@@ -298,5 +344,6 @@
   </div>
 
   <script src="app.js" defer></script>
+  <script src="exploit-runner.js" defer></script>
 </body>
 </html>

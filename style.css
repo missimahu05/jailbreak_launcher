@@ -729,6 +729,287 @@ body.ps-theme {
   }
 }
 
+/* Brand Logo Image */
+.brand-logo-img {
+  border-radius: 8px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 136, 255, 0.3));
+}
+
+/* ==========================================================================
+   6. Panneau d'Execution Exploit
+   ========================================================================== */
+.exploit-panel {
+  background: linear-gradient(180deg, rgba(8, 18, 42, 0.8) 0%, rgba(4, 10, 28, 0.92) 100%);
+  border: 1px solid rgba(0, 136, 255, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exploit-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.exploit-title-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.exploit-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-pure);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.exploit-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+.exploit-subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 0.15rem;
+}
+
+/* Statut */
+.exploit-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(14, 28, 60, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-idle {
+  background-color: #64748b;
+}
+
+.status-running {
+  background-color: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: statusPulse 1.2s ease-in-out infinite;
+}
+
+.status-success {
+  background-color: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.status-error {
+  background-color: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Barre de progression */
+.exploit-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.exploit-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(14, 28, 60, 0.7);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.exploit-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  border-radius: var(--radius-pill);
+  transition: width 0.4s ease;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+.exploit-progress-text {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ps-cyan);
+  min-width: 3.5ch;
+  text-align: right;
+}
+
+/* Etape courante */
+.exploit-stage-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  min-height: 1.35em;
+}
+
+/* Console de logs */
+.exploit-console {
+  background: rgba(2, 5, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.3) transparent;
+}
+
+.console-inner {
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: #7dd3fc;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.exploit-console::-webkit-scrollbar {
+  width: 5px;
+}
+
+.exploit-console::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.exploit-console::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+  border-radius: 4px;
+}
+
+/* Boutons d'action exploit */
+.exploit-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.exploit-launch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1.75rem;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-md);
+  color: var(--text-pure);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.exploit-launch-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(2, 132, 199, 0.45);
+}
+
+.exploit-launch-btn:active {
+  transform: translateY(0);
+}
+
+.exploit-launch-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.exploit-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(14, 28, 60, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.exploit-clear-btn:hover {
+  background: rgba(20, 42, 90, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+/* Credits */
+.exploit-credits {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================================================
+   7. Responsive pour le panneau exploit
+   ========================================================================== */
+@media (max-width: 960px) {
+  .exploit-panel {
+    padding: 1.5rem;
+  }
+
+  .exploit-panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .exploit-panel {
+    padding: 1.25rem;
+    gap: 1.15rem;
+  }
+
+  .exploit-actions {
+    flex-direction: column;
+  }
+
+  .exploit-launch-btn,
+  .exploit-clear-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Accessibilité : Réduction des mouvements */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

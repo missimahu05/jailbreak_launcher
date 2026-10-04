@@ -70,6 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerAction(payloadId, title) {
     showToast(`Exécution : ${title || payloadId}...`);
     console.log(`[JjTech] Lancement du module : ${payloadId}`);
+
+    // Pour GoldHEN, on scrolle vers le panneau exploit et on lance
+    if (payloadId === 'goldhen') {
+      const panel = document.getElementById('exploit-panel');
+      const launchBtn = document.getElementById('exploit-launch-btn');
+      if (panel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Auto-click le bouton de lancement après le scroll
+        if (launchBtn && !launchBtn.disabled) {
+          setTimeout(() => launchBtn.click(), 600);
+        }
+      }
+    }
   }
 
   // -------------------------------------------------------------

@@ -3,232 +3,300 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Host Dashboard personnalisé pour console — JjTech's Edition.">
-  <title>Host Dashboard | JjTech's Edition</title>
+  <meta name="description" content="JjTech - Espace de gestion et lancement de modules PS4">
+  <title>JjTech | Espace de gestion modules PS4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-light">
-  <!-- Toile d'animation d'arrière-plan discrète -->
-  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+<body class="ps-theme">
+  <!-- Fond dynamique avec vagues lumineuses d'ambiance -->
+  <div class="ambient-waves" aria-hidden="true">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+  </div>
 
-  <div class="layout-wrapper">
-    <!-- Barre supérieure -->
-    <header class="topbar">
-      <div class="topbar-brand">
-        <div class="brand-badge">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-            <path d="M6 12h4"></path>
-            <path d="M8 10v4"></path>
-            <circle cx="15" cy="11" r="1"></circle>
-            <circle cx="17" cy="13" r="1"></circle>
+  <div class="app-viewport">
+    <!-- Barre de navigation supérieure PlayStation Style -->
+    <header class="ps-navbar">
+      <div class="navbar-left">
+        <!-- Logo JjTech -->
+        <a href="#" class="brand-logo" aria-label="Accueil JjTech">
+          <svg class="brand-glyph" viewBox="0 0 36 36" width="34" height="34" fill="none" aria-hidden="true">
+            <path d="M10 6C10 4.89543 10.8954 4 12 4H18V24C18 28.4183 14.4183 32 10 32C7.79086 32 6 30.2091 6 28C6 25.7909 7.79086 24 10 24V6Z" fill="url(#brand-grad-1)"/>
+            <path d="M19 12H27C28.1046 12 29 12.8954 29 14V22C29 27.5228 24.5228 32 19 32V24C21.2091 24 23 22.2091 23 20V16H19V12Z" fill="url(#brand-grad-2)"/>
+            <defs>
+              <linearGradient id="brand-grad-1" x1="6" y1="4" x2="18" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38bdf8"/>
+                <stop offset="1" stop-color="#0284c7"/>
+              </linearGradient>
+              <linearGradient id="brand-grad-2" x1="19" y1="12" x2="29" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00a8ff"/>
+                <stop offset="1" stop-color="#0055ff"/>
+              </linearGradient>
+            </defs>
           </svg>
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">JjTech's Dashboard</span>
-        </div>
+          <span class="brand-name">JjTech</span>
+        </a>
+
+        <div class="nav-divider" aria-hidden="true"></div>
+
+        <!-- Onglet Actif Tableau de bord -->
+        <nav class="main-tabs" aria-label="Navigation principale">
+          <button class="tab-item active" type="button" aria-current="page">
+            <svg class="tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Tableau de bord</span>
+          </button>
+        </nav>
       </div>
 
-      <div class="topbar-actions">
-        <div class="fw-picker">
-          <label for="fw-select" class="picker-label">Firmware</label>
-          <div class="select-container">
-            <select id="fw-select" class="custom-select" aria-label="Sélectionner le firmware">
-              <option value="13.02" selected>FW 13.02 - 13.52</option>
-              <option value="11.00">FW 11.00</option>
-              <option value="9.00">FW 9.00</option>
-              <option value="6.72">FW 6.72</option>
-              <option value="5.05">FW 5.05</option>
-            </select>
-            <svg class="select-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="6 9 12 15 18 9"></polyline>
+      <!-- Barre de recherche -->
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="module-search" class="search-input" placeholder="Rechercher un module..." aria-label="Rechercher un module">
+      </div>
+
+      <!-- Contrôles utilisateur et statut manette -->
+      <div class="navbar-right">
+        <!-- Sélecteur de profil / compte -->
+        <div class="user-menu-btn" role="button" tabindex="0" aria-label="Menu profil utilisateur">
+          <div class="user-avatar">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
             </svg>
           </div>
+          <span class="user-name">Mon compte</span>
+          <svg class="chevron-down" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </div>
 
-        <div class="network-badge" id="network-badge" title="Statut de connectivité">
-          <span class="badge-dot"></span>
-          <span class="badge-text" id="network-text">En ligne</span>
+        <!-- Badge Manette connectée -->
+        <div class="gamepad-status-badge" id="gamepad-badge">
+          <svg class="badge-gamepad-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="12" x2="10" y2="12"></line>
+            <line x1="8" y1="10" x2="8" y2="14"></line>
+            <line x1="15" y1="13" x2="15.01" y2="13"></line>
+            <line x1="18" y1="11" x2="18.01" y2="11"></line>
+            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+          </svg>
+          <span class="badge-status-dot"></span>
+          <span class="badge-status-text" id="gamepad-text">Manette connectée</span>
         </div>
       </div>
     </header>
 
-    <!-- Zone principale -->
-    <main class="main-content">
-      <!-- Section Hero / Lancement Principal -->
-      <section class="hero-card" aria-label="Action principale">
-        <div class="hero-ambient-glow" aria-hidden="true"></div>
-        <div class="hero-content">
-          <div class="hero-header-row">
-            <span class="tag-accent" id="fw-tag">Cible : Firmware 13.02</span>
+    <!-- Zone principale Hero + Carrousel -->
+    <main class="dashboard-body">
+      <!-- Section Hero de présentation -->
+      <section class="hero-presentation">
+        <div class="hero-text-col">
+          <span class="hero-surtitle">BIENVENUE SUR JJTECH</span>
+          <h1 class="hero-headline">
+            Votre espace de gestion<br>
+            <span class="headline-accent">modules PS4</span>
+          </h1>
+          <p class="hero-subtext">Installez, gérez et optimisez votre console en toute simplicité.</p>
+        </div>
+
+        <!-- Visuel PS4 Pro + Manette & Symbole PlayStation -->
+        <div class="hero-visual-col">
+          <div class="ps-logo-glow" aria-hidden="true">
+            <!-- Logo PlayStation Vectoriel Officiel -->
+            <svg viewBox="0 0 24 24" width="70" height="70" fill="currentColor">
+              <path d="M9.167 14.167l2.833 1.083V7.25l-2.833.917v6zm13.166 4.333c-1.083.5-3.333.667-5 .5v-3.5c1.417.083 2.833-.083 3.5-.417.667-.333.833-.75.417-1.083-.333-.333-1-.417-1.917-.417-1.167 0-2.583.333-3.667.833l-.833.417-.667-1.583 1.083-.5c1.417-.667 3.083-1 4.5-1 1.75 0 3.25.333 4 1 .917.833.75 2.167-.416 3.25zm-14.75 2.5c-.917.417-2.167.583-3.25.5-1.5-.083-2.5-.583-2.916-1.333-.5-.75-.084-1.75 1.083-2.584 1.333-.916 3.333-1.5 5.083-1.666v2.333c-1.333.167-2.667.5-3.417 1-.416.25-.5.5-.333.667.167.167.583.25 1.167.25.75 0 1.667-.167 2.583-.5v1.333z"/>
+            </svg>
           </div>
-          <h2 class="hero-title" id="hero-title">Chargement Principal</h2>
-          <p class="hero-desc" id="hero-desc">Environnement optimisé pour les firmwares 13.02 à 13.52 avec gestion intégrée des modules système.</p>
-          
-          <div class="hero-cta-group">
-            <button id="btn-primary-launch" class="btn btn-primary" type="button">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-              <span id="primary-launch-text">Exécuter GoldHEN</span>
-            </button>
-          </div>
+          <img src="assets/ps4_pro.jpg" alt="Console PlayStation 4 Pro et manette DualShock 4" class="ps4-console-render">
         </div>
       </section>
 
-      <!-- Grille des modules -->
-      <section class="tools-section" aria-label="Outils et gestionnaires">
-        <div class="tools-heading">
-          <div>
-            <h3 class="tools-title">Modules & Utilitaires</h3>
-            <p class="tools-subtitle">Sélectionnez un outil pour votre console</p>
-          </div>
-          <span class="tools-count" id="tools-counter">5 modules prêts</span>
-        </div>
-
-        <div class="tools-grid" id="tools-grid">
-          <!-- Carte : GoldHEN -->
-          <article class="tool-card" data-card="goldhen">
-            <div class="tool-icon-box">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      <!-- Carrousel de Cartes Modules Interactives -->
+      <section class="modules-carousel-section" aria-label="Liste des modules">
+        <div class="carousel-track" id="carousel-track" role="region" aria-label="Modules carrousel">
+          <!-- Carte 1 : GoldHEN v2.4 (Active par défaut) -->
+          <article class="module-card active" data-index="0" data-payload="goldhen" tabindex="0">
+            <div class="card-inner-glow"></div>
+            <div class="card-icon-wrapper crown-gradient">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+                <path d="M2 19h20v2H2v-2zm1.5-6.5L6 17h12l2.5-4.5L16 14l-4-8-4 8-4.5-1.5z"/>
               </svg>
             </div>
-            <div class="tool-body">
-              <div class="tool-meta">
-                <span class="tool-cat">Système</span>
-                <span class="tool-status-pill available">Prêt</span>
-              </div>
-              <h4 class="tool-name">GoldHEN v2.4</h4>
-              <p class="tool-desc">Homebrew Enabler complet avec serveur FTP, Package Installer et configuration des plugins.</p>
-            </div>
-            <button class="btn btn-card-action btn-launch" data-payload="goldhen" type="button">
-              <span>Lancer</span>
+            <h2 class="card-title">GoldHEN v2.4</h2>
+            <p class="card-desc">Homebrew, exploit et outils pour votre PS4.</p>
+            <button class="card-action-btn" type="button" aria-label="Lancer GoldHEN v2.4">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </article>
 
-          <!-- Carte : DB Rebuilder -->
-          <article class="tool-card" data-card="dbrebuilder">
-            <div class="tool-icon-box">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Carte 2 : DB Rebuilder -->
+          <article class="module-card" data-index="1" data-payload="dbrebuilder" tabindex="0">
+            <div class="card-inner-glow"></div>
+            <div class="card-icon-wrapper purple-gradient">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
                 <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
               </svg>
             </div>
-            <div class="tool-body">
-              <div class="tool-meta">
-                <span class="tool-cat">Maintenance</span>
-                <span class="tool-status-pill available">Prêt</span>
-              </div>
-              <h4 class="tool-name">DB Rebuilder</h4>
-              <p class="tool-desc">Reconstruction des entrées SQLite et restauration des jeux FPKG disparus.</p>
-            </div>
-            <button class="btn btn-card-action btn-launch" data-payload="dbrebuilder" type="button">
-              <span>Lancer</span>
+            <h2 class="card-title">DB Rebuilder</h2>
+            <p class="card-desc">Réparation et reconstruction de la base de données.</p>
+            <button class="card-action-btn" type="button" aria-label="Lancer DB Rebuilder">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </article>
 
-          <!-- Carte : FTP Server -->
-          <article class="tool-card" data-card="ftpserver">
-            <div class="tool-icon-box">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Carte 3 : Serveur FTP -->
+          <article class="module-card" data-index="2" data-payload="ftpserver" tabindex="0">
+            <div class="card-inner-glow"></div>
+            <div class="card-icon-wrapper blue-gradient">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
                 <path d="M12 12v9"></path>
                 <path d="m8 17 4 4 4-4"></path>
               </svg>
             </div>
-            <div class="tool-body">
-              <div class="tool-meta">
-                <span class="tool-cat">Réseau</span>
-                <span class="tool-status-pill active">Port 2121</span>
-              </div>
-              <h4 class="tool-name">Serveur FTP</h4>
-              <p class="tool-desc">Accès au stockage interne et transfert des packages de jeux par le réseau local.</p>
-            </div>
-            <button class="btn btn-card-action btn-launch" data-payload="ftpserver" type="button">
-              <span>Activer</span>
+            <h2 class="card-title">Serveur FTP</h2>
+            <p class="card-desc">Accès et transfert de fichiers sur votre console.</p>
+            <button class="card-action-btn" type="button" aria-label="Lancer Serveur FTP">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </article>
 
-          <!-- Carte : Bloqueur de MAJ -->
-          <article class="tool-card" data-card="disableupdates">
-            <div class="tool-icon-box">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Carte 4 : Protection MAJ -->
+          <article class="module-card" data-index="3" data-payload="disableupdates" tabindex="0">
+            <div class="card-inner-glow"></div>
+            <div class="card-icon-wrapper green-gradient">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <line x1="9.5" y1="9" x2="14.5" y2="14"></line>
-                <line x1="14.5" y1="9" x2="9.5" y2="14"></line>
+                <polyline points="9 12 11 14 15 10"></polyline>
               </svg>
             </div>
-            <div class="tool-body">
-              <div class="tool-meta">
-                <span class="tool-cat">Sécurité</span>
-                <span class="tool-status-pill available">Recommandé</span>
-              </div>
-              <h4 class="tool-name">Protection MAJ</h4>
-              <p class="tool-desc">Verrouille le téléchargement automatique des firmwares pour préserver la compatibilité.</p>
-            </div>
-            <button class="btn btn-card-action btn-launch" data-payload="disableupdates" type="button">
-              <span>Appliquer</span>
+            <h2 class="card-title">Protection MAJ</h2>
+            <p class="card-desc">Verrouille le téléchargement automatique des firmwares.</p>
+            <button class="card-action-btn" type="button" aria-label="Appliquer la protection MAJ">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </article>
 
-          <!-- Carte : Sauvegardes -->
-          <article class="tool-card" data-card="backup">
-            <div class="tool-icon-box">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                <polyline points="7 3 7 8 15 8"></polyline>
+          <!-- Carte 5 : Backup Sauvegardes -->
+          <article class="module-card" data-index="4" data-payload="backup" tabindex="0">
+            <div class="card-inner-glow"></div>
+            <div class="card-icon-wrapper magenta-gradient">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                <path d="M18 16a3 3 0 1 0-3 3"></path>
+                <polyline points="18 13 18 16 21 16"></polyline>
               </svg>
             </div>
-            <div class="tool-body">
-              <div class="tool-meta">
-                <span class="tool-cat">Données</span>
-                <span class="tool-status-pill available">Prêt</span>
-              </div>
-              <h4 class="tool-name">Backup Sauvegardes</h4>
-              <p class="tool-desc">Extraction et sécurisation de vos sauvegardes de jeux et profils vers support USB.</p>
-            </div>
-            <button class="btn btn-card-action btn-launch" data-payload="backup" type="button">
-              <span>Exporter</span>
+            <h2 class="card-title">Backup Sauvegardes</h2>
+            <p class="card-desc">Extraction et sauvegarde de vos données de jeu.</p>
+            <button class="card-action-btn" type="button" aria-label="Lancer le backup de sauvegardes">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </article>
         </div>
-      </section>
 
-      <!-- Terminal / Journal d'activité -->
-      <section class="journal-card" aria-label="Journal d'exécution">
-        <div class="journal-header">
-          <div class="journal-title-box">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="4 17 10 11 4 5"></polyline>
-              <line x1="12" y1="19" x2="20" y2="19"></line>
-            </svg>
-            <span>Journal d'activité</span>
-          </div>
-          <button id="btn-clear-journal" class="journal-clear-btn" type="button">Effacer</button>
-        </div>
-        <div class="journal-console" id="journal-console" role="log" aria-live="polite">
-          <div class="log-entry log-entry-info">[Système] Interface JjTech's initialisée.</div>
+        <!-- Indicateurs de pagination carrousel -->
+        <div class="carousel-dots" id="carousel-dots" aria-label="Indicateurs de position">
+          <button class="dot active" data-index="0" aria-label="Module 1"></button>
+          <button class="dot" data-index="1" aria-label="Module 2"></button>
+          <button class="dot" data-index="2" aria-label="Module 3"></button>
+          <button class="dot" data-index="3" aria-label="Module 4"></button>
+          <button class="dot" data-index="4" aria-label="Module 5"></button>
         </div>
       </section>
     </main>
 
-    <!-- Pied de page épuré -->
-    <footer class="bottom-bar">
-      <p class="footer-copy">JjTech's Host Dashboard</p>
-      <div class="footer-meta">
-        <span>Mode Cache : <strong id="cache-indicator">Automatique</strong></span>
+    <!-- Barre inférieure HUD de navigation manette PlayStation -->
+    <footer class="ps-controller-hud">
+      <div class="hud-left">
+        <svg class="hud-gamepad-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="6" y1="12" x2="10" y2="12"></line>
+          <line x1="8" y1="10" x2="8" y2="14"></line>
+          <line x1="15" y1="13" x2="15.01" y2="13"></line>
+          <line x1="18" y1="11" x2="18.01" y2="11"></line>
+          <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+        </svg>
+        <span class="hud-title">Navigation manette PS4</span>
+      </div>
+
+      <div class="hud-actions-group">
+        <!-- Touche Croix : Sélectionner -->
+        <div class="hud-item">
+          <div class="btn-ps btn-cross">
+            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="3" x2="13" y2="13"></line>
+              <line x1="13" y1="3" x2="3" y2="13"></line>
+            </svg>
+          </div>
+          <span>Sélectionner</span>
+        </div>
+
+        <!-- Touche Rond : Retour -->
+        <div class="hud-item">
+          <div class="btn-ps btn-circle">
+            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="8" cy="8" r="5"></circle>
+            </svg>
+          </div>
+          <span>Retour</span>
+        </div>
+
+        <!-- Touche OPTIONS : Menu -->
+        <div class="hud-item">
+          <span class="btn-pill-key">OPTIONS</span>
+          <span>Menu</span>
+        </div>
+
+        <div class="hud-separator" aria-hidden="true"></div>
+
+        <!-- Touches L1 / R1 : Changer de section -->
+        <div class="hud-item">
+          <div class="shoulder-group">
+            <span class="btn-pill-key">L1</span>
+            <span class="btn-pill-key">R1</span>
+          </div>
+          <span>Changer de section</span>
+        </div>
       </div>
     </footer>
   </div>
 
-  <!-- GSAP pour les animations déclarées et accessibles -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <!-- Notification Toast intégrée -->
+  <div class="toast-notification" id="toast-notification" role="status" aria-live="polite">
+    <svg class="toast-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast-message" id="toast-message">Action exécutée avec succès</span>
+  </div>
+
   <script src="app.js" defer></script>
 </body>
 </html>

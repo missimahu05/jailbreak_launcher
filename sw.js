@@ -1,10 +1,10 @@
-const CACHE_NAME = 'console-host-v1';
+const CACHE_NAME = 'console-host-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './app.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'
+  './assets/ps4_pro.jpg'
 ];
 
 // Installation du Service Worker et mise en cache des ressources

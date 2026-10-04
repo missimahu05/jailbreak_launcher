@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Host Dashboard personnalisé pour console — JjTech's Edition.">
+  <title>Host Dashboard | JjTech's Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-light">
+  <!-- Toile d'animation d'arrière-plan discrète -->
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="layout-wrapper">
+    <!-- Barre supérieure -->
+    <header class="topbar">
+      <div class="topbar-brand">
+        <div class="brand-badge">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+            <path d="M6 12h4"></path>
+            <path d="M8 10v4"></path>
+            <circle cx="15" cy="11" r="1"></circle>
+            <circle cx="17" cy="13" r="1"></circle>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">JjTech's Dashboard</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="fw-picker">
+          <label for="fw-select" class="picker-label">Firmware</label>
+          <div class="select-container">
+            <select id="fw-select" class="custom-select" aria-label="Sélectionner le firmware">
+              <option value="13.02" selected>FW 13.02 - 13.52</option>
+              <option value="11.00">FW 11.00</option>
+              <option value="9.00">FW 9.00</option>
+              <option value="6.72">FW 6.72</option>
+              <option value="5.05">FW 5.05</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <div class="network-badge" id="network-badge" title="Statut de connectivité">
+          <span class="badge-dot"></span>
+          <span class="badge-text" id="network-text">En ligne</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Zone principale -->
+    <main class="main-content">
+      <!-- Section Hero / Lancement Principal -->
+      <section class="hero-card" aria-label="Action principale">
+        <div class="hero-ambient-glow" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="hero-header-row">
+            <span class="tag-accent" id="fw-tag">Cible : Firmware 13.02</span>
+          </div>
+          <h2 class="hero-title" id="hero-title">Chargement Principal</h2>
+          <p class="hero-desc" id="hero-desc">Environnement optimisé pour les firmwares 13.02 à 13.52 avec gestion intégrée des modules système.</p>
+          
+          <div class="hero-cta-group">
+            <button id="btn-primary-launch" class="btn btn-primary" type="button">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span id="primary-launch-text">Exécuter GoldHEN</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grille des modules -->
+      <section class="tools-section" aria-label="Outils et gestionnaires">
+        <div class="tools-heading">
+          <div>
+            <h3 class="tools-title">Modules & Utilitaires</h3>
+            <p class="tools-subtitle">Sélectionnez un outil pour votre console</p>
+          </div>
+          <span class="tools-count" id="tools-counter">5 modules prêts</span>
+        </div>
+
+        <div class="tools-grid" id="tools-grid">
+          <!-- Carte : GoldHEN -->
+          <article class="tool-card" data-card="goldhen">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="tool-body">
+              <div class="tool-meta">
+                <span class="tool-cat">Système</span>
+                <span class="tool-status-pill available">Prêt</span>
+              </div>
+              <h4 class="tool-name">GoldHEN v2.4</h4>
+              <p class="tool-desc">Homebrew Enabler complet avec serveur FTP, Package Installer et configuration des plugins.</p>
+            </div>
+            <button class="btn btn-card-action btn-launch" data-payload="goldhen" type="button">
+              <span>Lancer</span>
+            </button>
+          </article>
+
+          <!-- Carte : DB Rebuilder -->
+          <article class="tool-card" data-card="dbrebuilder">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+              </svg>
+            </div>
+            <div class="tool-body">
+              <div class="tool-meta">
+                <span class="tool-cat">Maintenance</span>
+                <span class="tool-status-pill available">Prêt</span>
+              </div>
+              <h4 class="tool-name">DB Rebuilder</h4>
+              <p class="tool-desc">Reconstruction des entrées SQLite et restauration des jeux FPKG disparus.</p>
+            </div>
+            <button class="btn btn-card-action btn-launch" data-payload="dbrebuilder" type="button">
+              <span>Lancer</span>
+            </button>
+          </article>
+
+          <!-- Carte : FTP Server -->
+          <article class="tool-card" data-card="ftpserver">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+                <path d="M12 12v9"></path>
+                <path d="m8 17 4 4 4-4"></path>
+              </svg>
+            </div>
+            <div class="tool-body">
+              <div class="tool-meta">
+                <span class="tool-cat">Réseau</span>
+                <span class="tool-status-pill active">Port 2121</span>
+              </div>
+              <h4 class="tool-name">Serveur FTP</h4>
+              <p class="tool-desc">Accès au stockage interne et transfert des packages de jeux par le réseau local.</p>
+            </div>
+            <button class="btn btn-card-action btn-launch" data-payload="ftpserver" type="button">
+              <span>Activer</span>
+            </button>
+          </article>
+
+          <!-- Carte : Bloqueur de MAJ -->
+          <article class="tool-card" data-card="disableupdates">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <line x1="9.5" y1="9" x2="14.5" y2="14"></line>
+                <line x1="14.5" y1="9" x2="9.5" y2="14"></line>
+              </svg>
+            </div>
+            <div class="tool-body">
+              <div class="tool-meta">
+                <span class="tool-cat">Sécurité</span>
+                <span class="tool-status-pill available">Recommandé</span>
+              </div>
+              <h4 class="tool-name">Protection MAJ</h4>
+              <p class="tool-desc">Verrouille le téléchargement automatique des firmwares pour préserver la compatibilité.</p>
+            </div>
+            <button class="btn btn-card-action btn-launch" data-payload="disableupdates" type="button">
+              <span>Appliquer</span>
+            </button>
+          </article>
+
+          <!-- Carte : Sauvegardes -->
+          <article class="tool-card" data-card="backup">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+            </div>
+            <div class="tool-body">
+              <div class="tool-meta">
+                <span class="tool-cat">Données</span>
+                <span class="tool-status-pill available">Prêt</span>
+              </div>
+              <h4 class="tool-name">Backup Sauvegardes</h4>
+              <p class="tool-desc">Extraction et sécurisation de vos sauvegardes de jeux et profils vers support USB.</p>
+            </div>
+            <button class="btn btn-card-action btn-launch" data-payload="backup" type="button">
+              <span>Exporter</span>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <!-- Terminal / Journal d'activité -->
+      <section class="journal-card" aria-label="Journal d'exécution">
+        <div class="journal-header">
+          <div class="journal-title-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span>Journal d'activité</span>
+          </div>
+          <button id="btn-clear-journal" class="journal-clear-btn" type="button">Effacer</button>
+        </div>
+        <div class="journal-console" id="journal-console" role="log" aria-live="polite">
+          <div class="log-entry log-entry-info">[Système] Interface JjTech's initialisée.</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Pied de page épuré -->
+    <footer class="bottom-bar">
+      <p class="footer-copy">JjTech's Host Dashboard</p>
+      <div class="footer-meta">
+        <span>Mode Cache : <strong id="cache-indicator">Automatique</strong></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- GSAP pour les animations déclarées et accessibles -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
